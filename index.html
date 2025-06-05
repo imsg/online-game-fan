@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnlineGameFan.com - Play Free Online Games</title>
+    <meta name="description" content="Discover a world of exciting online games at OnlineGameFan.com. Play your favorite games instantly, no downloads required!">
+    <link rel="canonical" href="https://onlinegamefan.com/index.html">
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Light grey background, Apple-like */
+        }
+        .hero-bg {
+            background-color: #ffffff; /* White background for hero section */
+        }
+        .game-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .nav-link {
+            transition: color 0.2s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #007aff; /* Apple blue for hover */
+        }
+        .button-primary {
+            background-color: #007aff; /* Apple blue */
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .button-primary:hover {
+            background-color: #005ecb; /* Darker Apple blue */
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-900">OnlineGameFan</a>
+            <div>
+                <a href="index.html" class="nav-link text-gray-700 font-medium mx-3">Home</a>
+                <a href="#featured-games" class="nav-link text-gray-700 font-medium mx-3">Games</a>
+                <a href="#about" class="nav-link text-gray-700 font-medium mx-3">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-16 md:py-24">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Welcome to OnlineGameFan!</h1>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                Your ultimate destination for fun and engaging online games. Dive in and start playing right away – no downloads, just pure entertainment!
+            </p>
+            <a href="#featured-games" class="button-primary font-semibold py-3 px-8 rounded-lg text-lg">
+                Explore Games
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Games Section -->
+    <section id="featured-games" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Featured Games</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Game Card: Monster Survivors -->
+                <div class="game-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="images/monster-survivors-cover.jpeg" alt="Monster Survivors Game Thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Monster Survivors</h3>
+                        <p class="text-gray-700 text-sm mb-4">
+                            Battle endless waves of monsters and prove your mettle in this thrilling survival game!
+                        </p>
+                        <a href="monster-survivors.html" class="button-primary inline-block font-medium py-2 px-5 rounded-lg text-sm">
+                            Play Now
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Placeholder for more game cards -->
+                <div class="game-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://placehold.co/600x400/e2e8f0/334155?text=Coming+Soon" alt="Coming Soon Game Thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Another Awesome Game</h3>
+                        <p class="text-gray-700 text-sm mb-4">
+                            Get ready for another exciting adventure. Coming soon to OnlineGameFan!
+                        </p>
+                        <a href="#" class="bg-gray-300 text-gray-600 inline-block font-medium py-2 px-5 rounded-lg text-sm cursor-not-allowed">
+                            Coming Soon
+                        </a>
+                    </div>
+                </div>
+                <div class="game-card bg-white rounded-xl shadow-lg overflow-hidden">
+                     <img src="https://placehold.co/600x400/e2e8f0/334155?text=Coming+Soon" alt="Coming Soon Game Thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">More Fun Awaits</h3>
+                        <p class="text-gray-700 text-sm mb-4">
+                            We are constantly adding new games. Keep an eye out for fresh challenges!
+                        </p>
+                        <a href="#" class="bg-gray-300 text-gray-600 inline-block font-medium py-2 px-5 rounded-lg text-sm cursor-not-allowed">
+                            Coming Soon
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="bg-white py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">About OnlineGameFan.com</h2>
+            <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto text-center">
+                OnlineGameFan.com was founded by a team of passionate gamers and developers dedicated to bringing you the best free-to-play online games. Our mission is to provide a seamless and enjoyable gaming experience for players of all ages. We believe in the power of games to entertain, challenge, and connect people. Explore our growing library and find your next favorite game!
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> OnlineGameFan.com. All Rights Reserved.</p>
+            <p class="text-sm mt-2">Designed with passion for gaming.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

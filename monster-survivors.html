@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monster Survivors - Play Free Online | OnlineGameFan.com</title>
+    <meta name="description" content="Dive into the thrilling world of Monster Survivors! Battle hordes of enemies and fight for survival in this action-packed online game.">
+    <link rel="canonical" href="https://onlinegamefan.com/monster-survivors.html">
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Slightly different light grey for game page */
+        }
+        .game-iframe-container {
+            position: relative;
+            width: 100%;
+            /* Aspect ratio 16:9 for the iframe */
+            padding-bottom: 56.25%; 
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem; /* 12px */
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .game-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .button-secondary {
+            background-color: #e5e7eb; /* Light gray button */
+            color: #374151; /* Dark gray text */
+            transition: background-color 0.3s ease;
+        }
+        .button-secondary:hover {
+            background-color: #d1d5db; /* Slightly darker gray */
+        }
+        .nav-link {
+            transition: color 0.2s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #007aff; /* Apple blue for hover */
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-900">OnlineGameFan</a>
+            <div>
+                <a href="index.html" class="nav-link text-gray-700 font-medium mx-3">Home</a>
+                <a href="index.html#featured-games" class="nav-link text-gray-700 font-medium mx-3">All Games</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Game Content Section -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-xl">
+            <!-- Game Title -->
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 text-center sm:text-left">Monster Survivors</h1>
+            <!-- Short Introduction -->
+            <p class="text-md sm:text-lg text-gray-700 mb-8 text-center sm:text-left">
+                Battle endless waves of monsters and prove your mettle in this thrilling survival game! Can you withstand the onslaught?
+            </p>
+
+            <!-- Game Iframe -->
+            <div class="game-iframe-container mb-10">
+                <iframe 
+                    src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html" 
+                    title="Monster Survivors Game" 
+                    allowfullscreen
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <!-- Game Basic Overview -->
+            <section>
+                <h2 class="text-2xl font-semibold text-gray-900 mb-4">Game Overview</h2>
+                <div class="space-y-4 text-gray-700 leading-relaxed">
+                    <p>
+                        Monster Survivors is an action-packed roguelike survival game where you face off against increasingly challenging waves of monsters. As you defeat enemies, you'll gain experience, level up, and unlock new abilities and upgrades to help you survive longer.
+                    </p>
+                    <p>
+                        <strong>Key Features:</strong>
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 pl-4">
+                        <li>Intense, fast-paced combat against hordes of unique monsters.</li>
+                        <li>A wide array of powerful abilities and upgrades to choose from.</li>
+                        <li>Roguelike progression: each run is different!</li>
+                        <li>Challenging boss battles to test your skills.</li>
+                        <li>Simple controls, deep gameplay.</li>
+                    </ul>
+                    
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-2 pt-6">How to Play</h2>
+                    <p>
+                        Navigating the treacherous world of Monster Survivors is straightforward:
+                    </p>
+                     <ul class="list-disc list-inside space-y-1 pl-4">
+                        <li><strong>Movement:</strong> Use your mouse to guide your character or WASD/Arrow keys (if supported by the game).</li>
+                        <li><strong>Attacking:</strong> Your character typically attacks automatically. Focus on positioning and dodging enemy attacks.</li>
+                        <li><strong>Upgrades:</strong> Collect experience gems dropped by defeated monsters to level up. Choose from a selection of random upgrades to enhance your abilities.</li>
+                        <li><strong>Objective:</strong> Survive for as long as you can against the relentless monster waves!</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-10 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> OnlineGameFan.com. All Rights Reserved.</p>
+            <a href="index.html" class="text-sm mt-2 text-blue-400 hover:text-blue-300">Back to Homepage</a>
+        </div>
+    </footer>
+
+</body>
+</html>
