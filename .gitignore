@@ -1,0 +1,29 @@
+# macOS system files
+.DS_Store
+
+# Node modules (if used in the future)
+node_modules/
+
+# Log files
+*.log
+
+# Local env files
+.env
+.env.*
+
+# VSCode settings
+.vscode/
+
+# npm debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output (if any)
+dist/
+build/
+
+# Other common ignores
+*.swp
+*.swo
+.idea/ 
