@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameMonetize Feed Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">GameMonetize Feed Test</h1>
+        
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">测试数据获取</h2>
+            <button id="fetchGames" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                获取游戏数据
+            </button>
+        </div>
+
+        <div id="results" class="bg-white rounded-lg shadow p-6">
+            <h2 class="text-xl font-semibold mb-4">结果</h2>
+            <div id="gameList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- 游戏列表将在这里动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import gameFetcher from './js/rss-fetcher.js';
+
+        document.getElementById('fetchGames').addEventListener('click', async () => {
+            try {
+                const games = await gameFetcher.fetchGames();
+                const gameList = document.getElementById('gameList');
+                gameList.innerHTML = ''; // 清空现有内容
+
+                games.forEach(game => {
+                    const gameCard = document.createElement('div');
+                    gameCard.className = 'bg-gray-50 rounded-lg p-4';
+                    gameCard.innerHTML = `
+                        <img src="${game.thumb}" alt="${game.title}" class="w-full h-48 object-cover rounded mb-4">
+                        <h3 class="font-semibold mb-2">${game.title}</h3>
+                        <p class="text-sm text-gray-600 mb-2">${game.category}</p>
+                        <p class="text-xs text-gray-500 mb-4">${game.description.substring(0, 100)}...</p>
+                        <a href="${game.url}" target="_blank" class="text-blue-500 hover:text-blue-600 text-sm">
+                            开始游戏 →
+                        </a>
+                    `;
+                    gameList.appendChild(gameCard);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+                alert('获取游戏数据失败，请查看控制台了解详情。');
+            }
+        });
+    </script>
+</body>
+</html> 

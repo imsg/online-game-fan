@@ -19,11 +19,58 @@
             background-color: #ffffff; /* White background for hero section */
         }
         .game-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         .game-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .game-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .game-card-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .game-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+        .game-card-description {
+            color: #4a5568;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        .game-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        .game-card-category {
+            color: #718096;
+            font-size: 0.875rem;
+        }
+        .game-card-button {
+            background-color: #007AFF;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+        }
+        .game-card-button:hover {
+            background-color: #0056b3;
         }
         .nav-link {
             transition: color 0.2s ease-in-out;
@@ -38,6 +85,89 @@
         }
         .button-primary:hover {
             background-color: #005ecb; /* Darker Apple blue */
+        }
+        .category-tab {
+            transition: all 0.2s;
+        }
+        .category-tab.active {
+            background-color: #007AFF;
+            color: white;
+        }
+        /* 添加左侧分类列表样式 */
+        .category-list {
+            width: 200px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem;
+        }
+        .category-item {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 0.5rem;
+        }
+        .category-item:hover {
+            background-color: #f3f4f6;
+        }
+        .category-item.active {
+            background-color: #007AFF;
+            color: white;
+        }
+        .main-content {
+            display: flex;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .games-container {
+            flex: 1;
+            position: relative;
+            min-height: 200px;
+        }
+        /* 加载状态样式 */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007AFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            .category-list {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
         }
     </style>
 </head>
@@ -69,48 +199,54 @@
     </section>
 
     <!-- Featured Games Section -->
-    <section id="featured-games" class="py-16">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Featured Games</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Game Card: Monster Survivors -->
-                <div class="game-card bg-white rounded-xl shadow-lg overflow-hidden">
-                    <img src="images/monster-survivors-cover.jpeg" alt="Monster Survivors Game Thumbnail" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Monster Survivors</h3>
-                        <p class="text-gray-700 text-sm mb-4">
-                            Battle endless waves of monsters and prove your mettle in this thrilling survival game!
-                        </p>
-                        <a href="monster-survivors.html" class="button-primary inline-block font-medium py-2 px-5 rounded-lg text-sm">
-                            Play Now
-                        </a>
-                    </div>
+    <section class="py-12">
+        <div class="main-content">
+            <!-- 左侧分类列表 -->
+            <div class="category-list">
+                <h3 class="text-lg font-semibold mb-4 text-gray-900">Categories</h3>
+                <div id="categoryList">
+                    <div class="category-item active" data-category="all">All Games</div>
+                    <div class="category-item" data-category="0">Action</div>
+                    <div class="category-item" data-category="1">.IO</div>
+                    <div class="category-item" data-category="2">2 Player</div>
+                    <div class="category-item" data-category="3">3D</div>
+                    <div class="category-item" data-category="4">Adventure</div>
+                    <div class="category-item" data-category="5">Arcade</div>
+                    <div class="category-item" data-category="19">Baby Hazel</div>
+                    <div class="category-item" data-category="6">Bejeweled</div>
+                    <div class="category-item" data-category="7">Boys</div>
+                    <div class="category-item" data-category="8">Clicker</div>
+                    <div class="category-item" data-category="9">Cooking</div>
+                    <div class="category-item" data-category="10">Girls</div>
+                    <div class="category-item" data-category="11">Hypercasual</div>
+                    <div class="category-item" data-category="12">Multiplayer</div>
+                    <div class="category-item" data-category="13">Puzzle</div>
+                    <div class="category-item" data-category="14">Racing</div>
+                    <div class="category-item" data-category="15">Shooting</div>
+                    <div class="category-item" data-category="16">Soccer</div>
+                    <div class="category-item" data-category="17">Sports</div>
+                    <div class="category-item" data-category="18">Stickman</div>
+                </div>
+            </div>
+
+            <!-- 右侧游戏列表 -->
+            <div class="games-container">
+                <!-- Loading State -->
+                <div id="loadingState" class="loading-overlay">
+                    <div class="loading-spinner"></div>
+                    <p class="mt-4 text-gray-600">Loading games...</p>
                 </div>
 
-                <!-- Placeholder for more game cards -->
-                <div class="game-card bg-white rounded-xl shadow-lg overflow-hidden">
-                    <img src="https://placehold.co/600x400/e2e8f0/334155?text=Coming+Soon" alt="Coming Soon Game Thumbnail" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Another Awesome Game</h3>
-                        <p class="text-gray-700 text-sm mb-4">
-                            Get ready for another exciting adventure. Coming soon to OnlineGameFan!
-                        </p>
-                        <a href="#" class="bg-gray-300 text-gray-600 inline-block font-medium py-2 px-5 rounded-lg text-sm cursor-not-allowed">
-                            Coming Soon
-                        </a>
-                    </div>
+                <!-- Games Grid -->
+                <div id="gameList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    <!-- Games will be dynamically added here -->
                 </div>
-                <div class="game-card bg-white rounded-xl shadow-lg overflow-hidden">
-                     <img src="https://placehold.co/600x400/e2e8f0/334155?text=Coming+Soon" alt="Coming Soon Game Thumbnail" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">More Fun Awaits</h3>
-                        <p class="text-gray-700 text-sm mb-4">
-                            We are constantly adding new games. Keep an eye out for fresh challenges!
-                        </p>
-                        <a href="#" class="bg-gray-300 text-gray-600 inline-block font-medium py-2 px-5 rounded-lg text-sm cursor-not-allowed">
-                            Coming Soon
-                        </a>
-                    </div>
+
+                <!-- Load More Button -->
+                <div class="flex justify-center mt-8">
+                    <button id="loadMoreBtn" class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        Load More Games
+                    </button>
                 </div>
             </div>
         </div>
@@ -134,5 +270,124 @@
         </div>
     </footer>
 
+    <script type="module">
+        import gameFetcher from './js/rss-fetcher.js';
+
+        // 获取DOM元素
+        const gameList = document.getElementById('gameList');
+        const categoryList = document.getElementById('categoryList');
+        const loadingState = document.getElementById('loadingState');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+        // 状态管理
+        let currentPage = 1;
+        let currentCategory = 'all';
+        let isLoading = false;
+        let hasMoreGames = true;
+
+        // 显示加载状态
+        function showLoading() {
+            loadingState.classList.add('active');
+            gameList.style.opacity = '0.5';
+            loadMoreBtn.disabled = true;
+        }
+
+        // 隐藏加载状态
+        function hideLoading() {
+            loadingState.classList.remove('active');
+            gameList.style.opacity = '1';
+            loadMoreBtn.disabled = false;
+        }
+
+        // 渲染游戏卡片
+        function renderGameCard(game) {
+            return `
+                <div class="game-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="${game.thumb}" alt="${game.title}">
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">${game.title}</h3>
+                        <p class="game-card-description">
+                            ${game.description.substring(0, 100)}...
+                        </p>
+                        <div class="game-card-footer">
+                            <span class="game-card-category">${game.category}</span>
+                            <a href="game.html?id=${game.id}" class="game-card-button">
+                                Play Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 加载游戏
+        async function loadGames(append = false) {
+            if (isLoading || !hasMoreGames) return;
+
+            try {
+                isLoading = true;
+                showLoading();
+                
+                // 获取游戏数据
+                const games = await gameFetcher.fetchGames(currentCategory, currentPage);
+                console.log('Loading page:', currentPage, 'Category:', currentCategory);
+                
+                // 检查是否还有更多游戏
+                hasMoreGames = games.length > 0;
+                
+                if (hasMoreGames) {
+                    // 显示游戏
+                    if (append) {
+                        gameList.innerHTML += games.map(renderGameCard).join('');
+                    } else {
+                        gameList.innerHTML = games.map(renderGameCard).join('');
+                    }
+                    currentPage++;
+                } else {
+                    // 如果没有更多游戏，隐藏加载更多按钮
+                    loadMoreBtn.style.display = 'none';
+                }
+                
+                hideLoading();
+            } catch (error) {
+                console.error('Error loading games:', error);
+                hideLoading();
+                if (!append) {
+                    gameList.innerHTML = `
+                        <div class="col-span-full text-center py-8">
+                            <p class="text-red-500">Failed to load games. Please try again later.</p>
+                        </div>
+                    `;
+                }
+            } finally {
+                isLoading = false;
+            }
+        }
+
+        // 重置状态
+        function resetState() {
+            currentPage = 1;
+            hasMoreGames = true;
+            loadMoreBtn.style.display = 'block';
+        }
+
+        // 事件监听器
+        categoryList.addEventListener('click', (e) => {
+            const categoryItem = e.target.closest('.category-item');
+            if (categoryItem) {
+                currentCategory = categoryItem.dataset.category;
+                resetState();
+                updateCategorySelection(currentCategory);
+                loadGames(false);
+            }
+        });
+
+        loadMoreBtn.addEventListener('click', () => {
+            loadGames(true);
+        });
+
+        // 初始化页面
+        loadGames(false);
+    </script>
 </body>
 </html>

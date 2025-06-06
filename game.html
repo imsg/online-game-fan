@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Game - OnlineGameFan.com</title>
+    <meta name="description" content="Play the best online games for free at OnlineGameFan.com. No downloads required, instant play!">
+    <link rel="canonical" href="https://onlinegamefan.com/game.html">
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .game-container {
+            aspect-ratio: 16/9;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .game-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000;
+        }
+        .nav-link {
+            transition: color 0.2s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #007aff;
+        }
+        .button-primary {
+            background-color: #007aff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .button-primary:hover {
+            background-color: #005ecb;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-900">OnlineGameFan</a>
+            <div>
+                <a href="index.html" class="nav-link text-gray-700 font-medium mx-3">Home</a>
+                <a href="index.html#featured-games" class="nav-link text-gray-700 font-medium mx-3">Games</a>
+                <a href="index.html#about" class="nav-link text-gray-700 font-medium mx-3">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Game Section -->
+    <section class="py-8">
+        <div class="container mx-auto px-6">
+            <!-- Game Title and Info -->
+            <div class="mb-8">
+                <h1 id="gameTitle" class="text-3xl font-bold text-gray-900 mb-4">Loading...</h1>
+                <div class="flex items-center gap-4 text-sm text-gray-600">
+                    <span id="gameCategory">Category: Loading...</span>
+                    <span id="gameRating">Rating: Loading...</span>
+                </div>
+            </div>
+
+            <!-- Game Container -->
+            <div class="game-container bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div id="gameFrame" class="game-frame">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-blue-500 border-t-transparent"></div>
+                            <p class="mt-2 text-gray-600">Loading game...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Description -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">About This Game</h2>
+                <p id="gameDescription" class="text-gray-700 leading-relaxed">
+                    Loading game description...
+                </p>
+            </div>
+
+            <!-- Game Instructions -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">How to Play</h2>
+                <div id="gameInstructions" class="text-gray-700 leading-relaxed">
+                    Loading game instructions...
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> OnlineGameFan.com. All Rights Reserved.</p>
+            <p class="text-sm mt-2">Designed with passion for gaming.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import gameFetcher from './js/rss-fetcher.js';
+
+        // 获取URL参数
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameId = urlParams.get('id');
+
+        // 获取DOM元素
+        const gameTitle = document.getElementById('gameTitle');
+        const gameCategory = document.getElementById('gameCategory');
+        const gameRating = document.getElementById('gameRating');
+        const gameDescription = document.getElementById('gameDescription');
+        const gameInstructions = document.getElementById('gameInstructions');
+        const gameFrame = document.getElementById('gameFrame');
+
+        // 更新页面标题
+        function updatePageTitle(title) {
+            document.title = `${title} - OnlineGameFan.com`;
+        }
+
+        // 加载游戏
+        async function loadGame() {
+            try {
+                // 获取所有游戏
+                const games = await gameFetcher.fetchGames();
+                
+                // 查找当前游戏
+                const game = games.find(g => g.id === gameId);
+                
+                if (!game) {
+                    throw new Error('Game not found');
+                }
+
+                // 更新页面内容
+                gameTitle.textContent = game.title;
+                gameCategory.textContent = `Category: ${game.category}`;
+                gameRating.textContent = `Rating: ${game.rating || 'N/A'}`;
+                gameDescription.textContent = game.description;
+                gameInstructions.innerHTML = game.instructions || 'No instructions available.';
+                
+                // 更新页面标题
+                updatePageTitle(game.title);
+
+                // 加载游戏iframe
+                gameFrame.innerHTML = `
+                    <iframe 
+                        src="${game.url}" 
+                        class="w-full h-full"
+                        allowfullscreen
+                        scrolling="no"
+                        frameborder="0"
+                    ></iframe>
+                `;
+
+            } catch (error) {
+                console.error('Error loading game:', error);
+                gameTitle.textContent = 'Error Loading Game';
+                gameDescription.textContent = 'Sorry, we couldn\'t load the game. Please try again later.';
+                gameFrame.innerHTML = `
+                    <div class="w-full h-full flex items-center justify-center">
+                        <p class="text-red-500">Failed to load game. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 如果没有游戏ID，重定向到首页
+        if (!gameId) {
+            window.location.href = 'index.html';
+        } else {
+            loadGame();
+        }
+    </script>
+</body>
+</html> 
